@@ -1,30 +1,815 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f4efe6"><meta name="description" content="Entre Todos: una aventura de mesa para descubrir cómo nuestras decisiones cambian una comunidad.">
-<title>Entre Todos · El camino lo hacemos juntos</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4efe6">
+  <meta
+    name="description"
+    content="Decide: una aventura de mesa para descubrir cómo nuestras decisiones cambian una comunidad."
+  >
+
+  <title>Decide · El camino lo hacemos juntos</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="shell">
-<header class="topbar"><a class="brand" href="#" aria-label="Entre Todos, inicio"><span class="brand-mark">✦</span><span>entre <strong>todos.</strong></span></a><nav aria-label="Navegación principal"><button class="navbtn active" data-section="play">Jugar</button><button class="navbtn" data-section="explore">Descubrir</button><button class="navbtn" data-section="guide">Cómo se juega</button><button class="navbtn" data-section="teacher">Para docentes</button></nav><button id="soundToggle" class="iconbtn" aria-label="Activar o desactivar efectos sonoros" title="Efectos sonoros">♪</button></header>
-<main>
-<section id="play" class="page active">
-<div class="hero"><div><span class="eyebrow">UN JUEGO SOBRE LO QUE CONSTRUIMOS JUNTOS</span><h1>El camino lo<br><em>hacemos entre todos.</em></h1><p>Un tablero, muchas decisiones. Avanza, descubre sorpresas y transforma una ciudad donde cada persona cuenta.</p></div><div class="hero-sticker" aria-hidden="true"><span>★</span><small>¡TU TURNO<br>DE CAMBIAR!</small></div></div>
-<div class="game-layout">
-<div class="board-area"><div class="board-heading"><div><span class="eyebrow">EL RECORRIDO</span><h2>Un camino, tres mundos</h2></div><div class="board-head-right"><span class="stage-key"><i style="background:#e2ae79"></i>Origen</span><span class="stage-key"><i style="background:#80bec1"></i>Encuentro</span><span class="stage-key"><i style="background:#a4bc8c"></i>Futuro</span></div></div><div class="board-frame"><div class="board-decor decor-a">✦</div><div class="board-decor decor-b">✳</div><div class="board-decor decor-c">✧</div><div class="board-grid" id="board" aria-label="Tablero con 30 casillas"></div><div class="board-bottom"><span>INICIO <b>➜</b></span><span id="boardMessage">Las mejores rutas se construyen juntos.</span><span><b>★</b> META</span></div></div><div class="world-progress"><div class="progress-head"><b>La ciudad que están construyendo</b><span id="cityScore">0 / 100</span></div><div class="progress-track"><span id="cityBar"></span></div><div id="unlocks" class="unlocks"><span>○ Plaza compartida</span><span>○ Biblioteca</span><span>○ Puente abierto</span></div></div></div>
-<aside class="sidebar"><div class="panel intro-panel" id="setupPanel"><span class="eyebrow">PREPARA LA AVENTURA</span><h2>¿Quiénes juegan?</h2><p>Jueguen juntos en un mismo dispositivo o practica por tu cuenta.</p><label for="playerCount">Número de jugadores</label><select id="playerCount"><option value="1">1 jugador (contra la máquina)</option><option value="2" selected>2 jugadores</option><option value="3">3 jugadores</option><option value="4">4 jugadores</option></select><button class="primary" id="startBtn">Comenzar partida <span>↗</span></button><p class="micro">Sin registro ni conexión obligatoria. El progreso se guarda en este navegador.</p></div>
-<div class="panel turn-panel hidden" id="turnPanel"><div class="turn-head"><span class="eyebrow">TURNO ACTUAL</span><button class="textbtn" id="restartBtn">Nueva partida ↺</button></div><div class="current-player"><div class="player-orb" id="turnOrb">●</div><div><h2 id="turnName">Jugador 1</h2><p id="turnHint">Lanza el dado para avanzar.</p></div></div><div id="diceBox" class="dice-box"><div id="dice" class="dice">⚄</div><button id="rollBtn" class="primary">Lanzar el dado ⚄</button></div><div class="stats-row"><div><strong id="turnStars">0</strong><small>Estrellas</small></div><div><strong id="turnActs">0</strong><small>Acciones</small></div><div><strong id="turnPos">Inicio</strong><small>Posición</small></div></div><div class="players-list" id="playersList"></div></div>
-<div class="panel tip-panel"><span class="eyebrow">¿SABÍAS QUE...?</span><h3 id="tipTitle">Nadie llega lejos solo</h3><p id="tipBody">A veces una regla que parece pequeña cambia las oportunidades de todo un grupo.</p><button class="textbtn" id="nextTipBtn">Otro dato ↗</button></div>
-</aside>
-</div>
-</section>
-<section id="explore" class="page"><div class="section-header"><span class="eyebrow">UN POCO MÁS ALLÁ DEL TABLERO</span><h1>Descubre lo que hay <em>detrás de cada decisión.</em></h1><p>Explora ideas sencillas con ejemplos cotidianos. No necesitas memorizar fechas para entender lo que importa.</p></div><div class="topics" id="topics"></div><div class="explore-note"><h3>Un reto para llevar a la vida real</h3><p>Pregunta a dos personas: «¿Qué cambiarías para que más personas participen en las decisiones de tu comunidad?». Compara las respuestas sin juzgarlas y piensa qué tienen en común.</p></div></section>
-<section id="guide" class="page"><div class="section-header"><span class="eyebrow">APRENDE EN DOS MINUTOS</span><h1>Así se juega <em>Entre Todos.</em></h1></div><div class="guide-grid"><article><span>01</span><h3>Elige tu equipo</h3><p>Juega individualmente contra la máquina o invita a otras personas a turnarse en la misma pantalla.</p></article><article><span>02</span><h3>Lanza y avanza</h3><p>Las fichas avanzan por 30 casillas. Cada color y símbolo anuncia una sorpresa.</p></article><article><span>03</span><h3>Participa en desafíos</h3><p>Resolverás dilemas, preguntas con pistas y pequeñas misiones. Puedes aprender incluso si te equivocas.</p></article><article><span>04</span><h3>Cambia el tablero</h3><p>Algunas decisiones suman progreso para toda la ciudad. Se desbloquean mejoras visibles.</p></article><article><span>05</span><h3>Llega a la meta</h3><p>El juego termina cuando alguien alcanza la última casilla. Verás cómo quedó la comunidad y qué aportó cada persona.</p></article><article><span>06</span><h3>Reflexiona</h3><p>Al final aparece una pregunta para conversar. No siempre hay una única respuesta perfecta.</p></article></div><div class="legend-card"><h3>Leyenda de las casillas</h3><div id="legend" class="legend-grid"></div></div></section>
-<section id="teacher" class="page"><div class="section-header"><span class="eyebrow">GUÍA PARA EDUCADORES Y FAMILIAS</span><h1>Un juego para <em>pensar en comunidad.</em></h1><p>Entre Todos utiliza mecánicas simbólicas para explorar oportunidades desiguales, cooperación y participación.</p></div><div class="teacher-grid"><article><h3>Propósito</h3><p>Favorecer la reflexión sobre igualdad de oportunidades, derechos, participación y consecuencias de decisiones colectivas.</p></article><article><h3>Conexión histórica</h3><p>Las reglas desiguales y su transformación permiten conversar sobre privilegios, tensiones sociales y cambios políticos del pasado. Para la evaluación escolar, se estudian por separado el Antiguo Régimen, la Revolución francesa y las rebeliones andinas del siglo XVIII, sin considerarlos procesos idénticos.</p></article><article><h3>Preguntas para dialogar</h3><p>¿Las mismas reglas producen siempre resultados justos? ¿Quién puede participar en una decisión? ¿Qué cambia cuando quienes tienen menos oportunidades también son escuchados?</p></article><article><h3>Cómo evaluar</h3><p>Antes y después de jugar, pide que expliquen una situación de desigualdad, identifiquen sus causas posibles y propongan una respuesta. Compara la calidad de los argumentos, no solo si eligen una opción.</p></article></div><p class="disclaimer">Las situaciones del juego son ficticias y simplificadas. Los puntos y mejoras no son mediciones reales de los derechos o la situación del Perú. No se recopilan datos personales ni se envían resultados a servidores.</p></section>
-</main><footer><span>ENTRE TODOS · Un proyecto educativo</span><span>Hecho para jugar, conversar y aprender.</span></footer></div>
-<div id="eventOverlay" class="overlay hidden" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="eventTitle"><div class="modal-top"><span id="eventCategory" class="modal-badge">DESAFÍO</span><span id="eventProgress" class="modal-sub"></span></div><div class="event-illustration" id="eventIllustration">✦</div><h2 id="eventTitle"></h2><p id="eventText"></p><div id="eventOptions" class="option-list"></div><div id="eventFeedback" class="feedback hidden"></div><button id="continueBtn" class="primary hidden">Seguir jugando <span>→</span></button></div></div>
-<div id="finalOverlay" class="overlay hidden"><div class="modal final-modal" role="dialog" aria-modal="true" aria-labelledby="finalTitle"><div class="finish-icon">✷</div><span class="eyebrow">FIN DE LA PARTIDA</span><h2 id="finalTitle">¡Llegaron al final!</h2><p id="finalText"></p><div id="finalRanking" class="ranking"></div><div class="reflection"><b>Para conversar:</b><p>¿En qué momento ayudó más cambiar una regla que avanzar por tu cuenta?</p></div><button class="primary" id="playAgainBtn">Volver a jugar ↗</button></div></div>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="app.js" defer></script>
-</body></html>
+
+  <div class="shell">
+
+    <!-- ENCABEZADO -->
+
+    <header class="topbar">
+
+      <a class="brand" href="#" aria-label="Decide, inicio">
+        <span class="brand-mark">✦</span>
+        <span>decide.</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <button class="navbtn active" data-section="play">
+          Jugar
+        </button>
+
+        <button class="navbtn" data-section="explore">
+          Descubrir
+        </button>
+
+        <button class="navbtn" data-section="guide">
+          Cómo se juega
+        </button>
+
+        <button class="navbtn" data-section="teacher">
+          Para docentes
+        </button>
+      </nav>
+
+      <button
+        id="soundToggle"
+        class="iconbtn"
+        aria-label="Activar o desactivar efectos sonoros"
+        title="Efectos sonoros"
+      >
+        ♪
+      </button>
+
+    </header>
+
+    <main>
+
+      <!-- ===================================
+           PÁGINA PRINCIPAL DEL JUEGO
+           =================================== -->
+
+      <section id="play" class="page active">
+
+        <div class="hero">
+
+          <div>
+            <span class="eyebrow">
+              UN JUEGO SOBRE LO QUE CONSTRUIMOS JUNTOS
+            </span>
+
+            <h1>
+              El camino lo<br>
+              <em>hacemos entre todos.</em>
+            </h1>
+
+            <p>
+              Un tablero, muchas decisiones.
+              Avanza, descubre sorpresas y transforma
+              una ciudad donde cada persona cuenta.
+            </p>
+          </div>
+
+          <div class="hero-sticker" aria-hidden="true">
+            <span>★</span>
+            <small>
+              ¡TU TURNO<br>
+              DE CAMBIAR!
+            </small>
+          </div>
+
+        </div>
+
+        <div class="game-layout">
+
+          <!-- TABLERO -->
+
+          <div class="board-area">
+
+            <div class="board-heading">
+
+              <div>
+                <span class="eyebrow">
+                  EL RECORRIDO
+                </span>
+
+                <h2>Un camino, tres mundos</h2>
+              </div>
+
+              <div class="board-head-right">
+
+                <span class="stage-key">
+                  <i style="background:#e2ae79"></i>
+                  Origen
+                </span>
+
+                <span class="stage-key">
+                  <i style="background:#80bec1"></i>
+                  Encuentro
+                </span>
+
+                <span class="stage-key">
+                  <i style="background:#a4bc8c"></i>
+                  Futuro
+                </span>
+
+              </div>
+
+            </div>
+
+            <div class="board-frame">
+
+              <div class="board-decor decor-a">✦</div>
+              <div class="board-decor decor-b">✳</div>
+              <div class="board-decor decor-c">✧</div>
+
+              <!-- Las casillas se generan con JavaScript -->
+
+              <div
+                class="board-grid"
+                id="board"
+                aria-label="Tablero con 30 casillas"
+              ></div>
+
+              <div class="board-bottom">
+
+                <span>
+                  INICIO <b>➜</b>
+                </span>
+
+                <span id="boardMessage">
+                  Las mejores rutas se construyen juntos.
+                </span>
+
+                <span>
+                  <b>★</b> META
+                </span>
+
+              </div>
+
+            </div>
+
+            <!-- PROGRESO DE LA CIUDAD -->
+
+            <div class="world-progress">
+
+              <div class="progress-head">
+
+                <b>
+                  La ciudad que están construyendo
+                </b>
+
+                <span id="cityScore">
+                  0 / 100
+                </span>
+
+              </div>
+
+              <div class="progress-track">
+                <span id="cityBar"></span>
+              </div>
+
+              <div id="unlocks" class="unlocks">
+
+                <span>○ Plaza compartida</span>
+                <span>○ Biblioteca</span>
+                <span>○ Puente abierto</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- PANEL LATERAL -->
+
+          <aside class="sidebar">
+
+            <!-- MENÚ PARA ELEGIR EL MODO -->
+
+            <div
+              class="panel intro-panel"
+              id="setupPanel"
+            >
+
+              <span class="eyebrow">
+                PREPARA LA AVENTURA
+              </span>
+
+              <h2>¿Quiénes juegan?</h2>
+
+              <p>
+                Jueguen juntos en un mismo dispositivo
+                o practica por tu cuenta.
+              </p>
+
+              <label for="playerCount">
+                Número de jugadores
+              </label>
+
+              <select id="playerCount">
+
+                <option value="1">
+                  1 jugador (contra la máquina)
+                </option>
+
+                <option value="2" selected>
+                  2 jugadores
+                </option>
+
+                <option value="3">
+                  3 jugadores
+                </option>
+
+                <option value="4">
+                  4 jugadores
+                </option>
+
+              </select>
+
+              <button
+                class="primary"
+                id="startBtn"
+              >
+                Comenzar partida
+                <span>↗</span>
+              </button>
+
+              <p class="micro">
+                Sin registro ni conexión obligatoria.
+                El progreso se guarda en este navegador.
+              </p>
+
+            </div>
+
+            <!-- PANEL DURANTE LA PARTIDA -->
+
+            <div
+              class="panel turn-panel hidden"
+              id="turnPanel"
+            >
+
+              <div class="turn-head">
+
+                <span class="eyebrow">
+                  TURNO ACTUAL
+                </span>
+
+                <button
+                  class="textbtn"
+                  id="restartBtn"
+                >
+                  Nueva partida ↺
+                </button>
+
+              </div>
+
+              <div class="current-player">
+
+                <div
+                  class="player-orb"
+                  id="turnOrb"
+                >
+                  ●
+                </div>
+
+                <div>
+
+                  <h2 id="turnName">
+                    Jugador 1
+                  </h2>
+
+                  <p id="turnHint">
+                    Lanza el dado para avanzar.
+                  </p>
+
+                </div>
+
+              </div>
+
+              <!-- DADO -->
+
+              <div
+                id="diceBox"
+                class="dice-box"
+              >
+
+                <div
+                  id="dice"
+                  class="dice"
+                >
+                  ⚄
+                </div>
+
+                <button
+                  id="rollBtn"
+                  class="primary"
+                >
+                  Lanzar el dado ⚄
+                </button>
+
+              </div>
+
+              <!-- ESTADÍSTICAS -->
+
+              <div class="stats-row">
+
+                <div>
+                  <strong id="turnStars">0</strong>
+                  <small>Estrellas</small>
+                </div>
+
+                <div>
+                  <strong id="turnActs">0</strong>
+                  <small>Acciones</small>
+                </div>
+
+                <div>
+                  <strong id="turnPos">Inicio</strong>
+                  <small>Posición</small>
+                </div>
+
+              </div>
+
+              <!-- JUGADORES -->
+
+              <div
+                class="players-list"
+                id="playersList"
+              ></div>
+
+              <!-- CAMBIAR MODO DE JUEGO -->
+
+              <button
+                id="changeModeBtn"
+                class="btn-menu"
+                type="button"
+              >
+                ↩ Cambiar modo de juego
+              </button>
+
+            </div>
+
+            <!-- CONSEJOS EDUCATIVOS -->
+
+            <div class="panel tip-panel">
+
+              <span class="eyebrow">
+                ¿SABÍAS QUE...?
+              </span>
+
+              <h3 id="tipTitle">
+                Nadie llega lejos solo
+              </h3>
+
+              <p id="tipBody">
+                A veces una regla que parece pequeña
+                cambia las oportunidades de todo un grupo.
+              </p>
+
+              <button
+                class="textbtn"
+                id="nextTipBtn"
+              >
+                Otro dato ↗
+              </button>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================
+           SECCIÓN DESCUBRIR
+           =================================== -->
+
+      <section id="explore" class="page">
+
+        <div class="section-header">
+
+          <span class="eyebrow">
+            UN POCO MÁS ALLÁ DEL TABLERO
+          </span>
+
+          <h1>
+            Descubre lo que hay
+            <em>detrás de cada decisión.</em>
+          </h1>
+
+          <p>
+            Explora ideas sencillas con ejemplos
+            cotidianos. No necesitas memorizar fechas
+            para entender lo que importa.
+          </p>
+
+        </div>
+
+        <!-- Contenido generado con JavaScript -->
+
+        <div
+          class="topics"
+          id="topics"
+        ></div>
+
+        <div class="explore-note">
+
+          <h3>
+            Un reto para llevar a la vida real
+          </h3>
+
+          <p>
+            Pregunta a dos personas:
+            «¿Qué cambiarías para que más personas
+            participen en las decisiones de tu comunidad?».
+
+            Compara las respuestas sin juzgarlas y
+            piensa qué tienen en común.
+          </p>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================
+           INSTRUCCIONES
+           =================================== -->
+
+      <section id="guide" class="page">
+
+        <div class="section-header">
+
+          <span class="eyebrow">
+            APRENDE EN DOS MINUTOS
+          </span>
+
+          <h1>
+            Así se juega
+            <em>Decide.</em>
+          </h1>
+
+        </div>
+
+        <div class="guide-grid">
+
+          <article>
+            <span>01</span>
+            <h3>Elige tu equipo</h3>
+            <p>
+              Juega individualmente contra la máquina
+              o invita a otras personas a turnarse
+              en la misma pantalla.
+            </p>
+          </article>
+
+          <article>
+            <span>02</span>
+            <h3>Lanza y avanza</h3>
+            <p>
+              Las fichas avanzan por 30 casillas.
+              Cada color y símbolo anuncia una sorpresa.
+            </p>
+          </article>
+
+          <article>
+            <span>03</span>
+            <h3>Participa en desafíos</h3>
+            <p>
+              Resolverás dilemas, preguntas con pistas
+              y pequeñas misiones.
+              Puedes aprender incluso si te equivocas.
+            </p>
+          </article>
+
+          <article>
+            <span>04</span>
+            <h3>Cambia el tablero</h3>
+            <p>
+              Algunas decisiones suman progreso
+              para toda la ciudad.
+              Se desbloquean mejoras visibles.
+            </p>
+          </article>
+
+          <article>
+            <span>05</span>
+            <h3>Llega a la meta</h3>
+            <p>
+              El juego termina cuando alguien alcanza
+              la última casilla.
+
+              Verás cómo quedó la comunidad
+              y qué aportó cada persona.
+            </p>
+          </article>
+
+          <article>
+            <span>06</span>
+            <h3>Reflexiona</h3>
+            <p>
+              Al final aparece una pregunta para conversar.
+              No siempre hay una única respuesta perfecta.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="legend-card">
+
+          <h3>Leyenda de las casillas</h3>
+
+          <div
+            id="legend"
+            class="legend-grid"
+          ></div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================
+           INFORMACIÓN PARA DOCENTES
+           =================================== -->
+
+      <section id="teacher" class="page">
+
+        <div class="section-header">
+
+          <span class="eyebrow">
+            GUÍA PARA EDUCADORES Y FAMILIAS
+          </span>
+
+          <h1>
+            Un juego para
+            <em>pensar en comunidad.</em>
+          </h1>
+
+          <p>
+            Decide utiliza mecánicas simbólicas
+            para explorar oportunidades desiguales,
+            cooperación y participación.
+          </p>
+
+        </div>
+
+        <div class="teacher-grid">
+
+          <article>
+
+            <h3>Propósito</h3>
+
+            <p>
+              Favorecer la reflexión sobre igualdad
+              de oportunidades, derechos, participación
+              y consecuencias de decisiones colectivas.
+            </p>
+
+          </article>
+
+          <article>
+
+            <h3>Conexión histórica</h3>
+
+            <p>
+              Las reglas desiguales y su transformación
+              permiten conversar sobre privilegios,
+              tensiones sociales y cambios políticos
+              del pasado.
+
+              Para la evaluación escolar, se estudian
+              por separado el Antiguo Régimen,
+              la Revolución francesa y las rebeliones
+              andinas del siglo XVIII, sin considerarlos
+              procesos idénticos.
+            </p>
+
+          </article>
+
+          <article>
+
+            <h3>Preguntas para dialogar</h3>
+
+            <p>
+              ¿Las mismas reglas producen siempre
+              resultados justos?
+
+              ¿Quién puede participar en una decisión?
+
+              ¿Qué cambia cuando quienes tienen menos
+              oportunidades también son escuchados?
+            </p>
+
+          </article>
+
+          <article>
+
+            <h3>Cómo evaluar</h3>
+
+            <p>
+              Antes y después de jugar, pide que
+              expliquen una situación de desigualdad,
+              identifiquen sus causas posibles y
+              propongan una respuesta.
+
+              Compara la calidad de los argumentos,
+              no solo si eligen una opción.
+            </p>
+
+          </article>
+
+        </div>
+
+        <p class="disclaimer">
+          Las situaciones del juego son ficticias
+          y simplificadas.
+
+          Los puntos y mejoras no son mediciones reales
+          de los derechos o la situación del Perú.
+
+          No se recopilan datos personales ni se envían
+          resultados a servidores.
+        </p>
+
+      </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer>
+
+      <span>
+        DECIDE · Un proyecto educativo
+      </span>
+
+      <span>
+        Hecho para jugar, conversar y aprender.
+      </span>
+
+    </footer>
+
+  </div>
+
+  <!-- ===================================
+       VENTANA DE CARTAS Y DESAFÍOS
+       =================================== -->
+
+  <div
+    id="eventOverlay"
+    class="overlay hidden"
+    role="presentation"
+  >
+
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="eventTitle"
+    >
+
+      <div class="modal-top">
+
+        <span
+          id="eventCategory"
+          class="modal-badge"
+        >
+          DESAFÍO
+        </span>
+
+        <span
+          id="eventProgress"
+          class="modal-sub"
+        ></span>
+
+      </div>
+
+      <div
+        class="event-illustration"
+        id="eventIllustration"
+      >
+        ✦
+      </div>
+
+      <h2 id="eventTitle"></h2>
+
+      <p id="eventText"></p>
+
+      <div
+        id="eventOptions"
+        class="option-list"
+      ></div>
+
+      <div
+        id="eventFeedback"
+        class="feedback hidden"
+      ></div>
+
+      <button
+        id="continueBtn"
+        class="primary hidden"
+      >
+        Seguir jugando
+        <span>→</span>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ===================================
+       PANTALLA FINAL
+       =================================== -->
+
+  <div
+    id="finalOverlay"
+    class="overlay hidden"
+  >
+
+    <div
+      class="modal final-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="finalTitle"
+    >
+
+      <div class="finish-icon">
+        ✷
+      </div>
+
+      <span class="eyebrow">
+        FIN DE LA PARTIDA
+      </span>
+
+      <h2 id="finalTitle">
+        ¡Llegaron al final!
+      </h2>
+
+      <p id="finalText"></p>
+
+      <div
+        id="finalRanking"
+        class="ranking"
+      ></div>
+
+      <div class="reflection">
+
+        <b>Para conversar:</b>
+
+        <p>
+          ¿En qué momento ayudó más cambiar una regla
+          que avanzar por tu cuenta?
+        </p>
+
+      </div>
+
+      <button
+        class="primary"
+        id="playAgainBtn"
+      >
+        Volver a jugar ↗
+      </button>
+
+      <button
+        id="finalChangeModeBtn"
+        class="btn-menu"
+        type="button"
+      >
+        ↩ Elegir otro modo de juego
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- NOTIFICACIONES -->
+
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <!-- JAVASCRIPT -->
+
+  <script src="app.js" defer></script>
+
+</body>
+</html>
